@@ -9,6 +9,7 @@
 
 #pragma once
 #include "position.h"
+// INCLUDE DRAWER AND MOVER HEADER FILES
 
 /******************************************
  * FLYER
@@ -23,11 +24,12 @@ private:
 	double radius;             // the size (radius) of the flyer
 	bool dead;                 // is this flyer dead?
 	int points;                // how many points is this worth?
+	Type type;
 	//Drawer drawer;
 	//Mover mover;
 public:
 public:
-	Flyer() : dead(false), points(0), radius(1.0) { }
+	Flyer(Type id) : dead(false), points(0), radius(1.0) { type = id; }
 
 	// setters
 	void operator=(const Position& rhs) { pt = rhs; }
@@ -41,9 +43,19 @@ public:
 	Velocity getVelocity()  const { return v; }
 	double getRadius()      const { return radius; }
 	int getPoints() const { return points; }
+	Type getType() const { return type; }
+	//Drawer& getDrawer() const { return *drawer; }
+	//Mover& getMover() const { return *mover; }
+
+
 	bool isOutOfBounds() const
 	{
 		return (pt.getX() < -radius || pt.getX() >= dimensions.getX() + radius ||
 			pt.getY() < -radius || pt.getY() >= dimensions.getY() + radius);
 	}
+};
+
+enum Type
+{
+	STANDARD, FLOATER, SINKER, CRAZY;
 };
