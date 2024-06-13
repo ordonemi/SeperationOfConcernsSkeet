@@ -18,21 +18,21 @@ using namespace std;
  ****************************************/
 void SkeetLogic::move()
 {
-	//for (auto it = storage.getBirdIterator(); it != storage.getBirdEnd(); ++it) {
-	//	it->getMover()->move();
-	//}
+	for (auto it = storage.getBirdIterator(); it != storage.getBirdEnd(); ++it) {
+		it->getMover()->move();
+	}
 
-	//for (auto it = storage.getBulletIterator(); it != storage.getBulletEnd(); ++it) {
-	//	it->getMover()->move();
-	//}
+	for (auto it = storage.getBulletIterator(); it != storage.getBulletEnd(); ++it) {
+		it->getMover()->move();
+	}
 
-	//for (auto it = storage.getEffectIterator(); it != storage.getEffectEnd(); ++it) {
-	//	it->getMover()->move();
-	//}
+	for (auto it = storage.getEffectIterator(); it != storage.getEffectEnd(); ++it) {
+		it->getMover()->move();
+	}
 
-	//for (auto it = storage.getPointIterator(); it != storage.getPointEnd(); ++it) {
-	//	it->getMover()->move();
-	//}
+	for (auto it = storage.getPointIterator(); it != storage.getPointEnd(); ++it) {
+		it->getMover()->move();
+	}
 }
 
 /******************************************************
@@ -51,54 +51,54 @@ void SkeetLogic::animate()
  ******************************************/
 void SkeetLogic::spawn()
 {
-	//switch (storage.getLevel())
-	//{
-	//// level 1 only has standard birds
-	//case 1:
-	//	if (storage.getBirdsSize() == 0 && random(0, 15) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
-	//	break;
+	switch (storage.getLevel())
+	{
+	// level 1 only has standard birds
+	case 1:
+		if (storage.getBirdsSize() == 0 && random(0, 15) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
+		break;
 
-	//// Level 2 has standard and sinker bird
-	//case 2:
-	//	if (storage.getBirdsSize() == 0 && random(0, 15) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(SINKER));
-	//	break;
+	// Level 2 has standard and sinker bird
+	case 2:
+		if (storage.getBirdsSize() == 0 && random(0, 15) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(SINKER));
+		break;
 
-	//// level 3 has standard, sinker and floater
-	//case 3:
-	//	if (storage.getBirdsSize() == 0 && random(0, 15) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(SINKER));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(FLOATER));
-	//	break;
+	// level 3 has standard, sinker and floater
+	case 3:
+		if (storage.getBirdsSize() == 0 && random(0, 15) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(SINKER));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(FLOATER));
+		break;
 
-	//// level 4 has standard, sinker, floater, and crazy bird
-	//case 4:
-	//	if (storage.getBirdsSize() == 0 && random(0, 15) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(SINKER));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(FLOATER));
-	//	if (random(0, 4 * 30) == 1)
-	//		storage.enrollBird(storage.getBirdFactory()->factory(CRAZY));
-	//	break;
-	//default:
-	//	break;
-	//}
+	// level 4 has standard, sinker, floater, and crazy bird
+	case 4:
+		if (storage.getBirdsSize() == 0 && random(0, 15) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(STANDARD));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(SINKER));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(FLOATER));
+		if (random(0, 4 * 30) == 1)
+			storage.enrollBird(storage.getBirdFactory()->factory(CRAZY));
+		break;
+	default:
+		break;
+	}
 }
 
 /*****************************************
