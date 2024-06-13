@@ -333,7 +333,6 @@ void Sinker::draw()
 {
    if (!isDead())
    {
-      drawDisk(pt, radius - 0.0, 0.0, 0.0, 0.8);
-      drawDisk(pt, radius - 4.0, 0.0, 0.0, 0.0);
+      
    }
 }
