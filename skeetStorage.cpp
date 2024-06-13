@@ -17,3 +17,8 @@ BirdFactory SkeetStorage::getBirdFactory()
 		return birdFactoryL4;
 	}
 }
+
+void SkeetStorage::enrollBird(Flyer* bird)
+{
+	birds.push_back(bird);
+}

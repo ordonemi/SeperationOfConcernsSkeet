@@ -23,14 +23,15 @@ private:
 	std::vector<Points> points;
 	std::vector<BirdFactory> levels;
 
+	Bird*     bird;
 	Gun*      gun;
 	Time*     time;
 	Score*    score;
 	HitRatio* hitRatio;
 
 public:
-	void enrollBird  (Bird bird);
-	void unenrollBird(Bird bird);
+	void enrollBird  (Flyer* bird);
+	void unenrollBird(Flyer* bird);
 
 	void enrollBullet  (Bullet bullet);
 	void unenrollBullet(Bullet bullet);

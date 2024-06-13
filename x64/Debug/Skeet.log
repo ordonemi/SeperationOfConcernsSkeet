@@ -1,3 +1,9 @@
-﻿  skeetStorage.cpp
-C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeetStorage.cpp(19): warning C4715: 'SkeetStorage::getBirdFactory': not all control paths return a value
+﻿  skeet.cpp
+C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeet.cpp(264,14): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeet.cpp(265,14): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeet.cpp(272,17): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeet.cpp(273,17): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeet.cpp(275,20): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeet.cpp(276,20): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeet.cpp(279,30): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
   Skeet.vcxproj -> C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\x64\Debug\Skeet.exe

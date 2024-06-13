@@ -44,8 +44,7 @@ public:
     // is the game currently playing right now?
     bool isPlaying() const { return time.isPlaying();  }
 private:
-    // generate new birds
-    void spawn();                  
+    // generate new birds                
     void drawBackground(double redBack, double greenBack, double blueBack) const;
     void drawTimer(double percent,
                    double redFore, double greenFore, double blueFore,
