@@ -9,6 +9,7 @@
 
 #pragma once
 // INCLUDE STORAGE HEADER FILE
+
 class SkeetLogic
 {
 public:
