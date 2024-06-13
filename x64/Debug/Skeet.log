@@ -1,0 +1,3 @@
+﻿  skeetStorage.cpp
+C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\skeetStorage.cpp(19): warning C4715: 'SkeetStorage::getBirdFactory': not all control paths return a value
+  Skeet.vcxproj -> C:\Users\benny\BYU-I\8th Semester\CSE 310\SeperationOfConcernsSkeet\x64\Debug\Skeet.exe

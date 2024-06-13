@@ -337,3 +337,66 @@ void Sinker::draw()
       drawDisk(pt, radius - 4.0, 0.0, 0.0, 0.0);
    }
 }
+
+Bird* BirdFactory::factory(BirdType type)
+{
+    return nullptr;
+}
+
+Bird* BirdFactoryLevel1::factory(BirdType type)
+{
+    double size = 30.0;
+    switch (type)
+    {
+    case STANDARD:
+        return new Standard(size, 7.0, 12);
+    }
+}
+
+Bird* BirdFactoryLevel2::factory(BirdType type)
+{
+    int size = 25.0;
+    switch (type)
+    {
+    case STANDARD:
+        return new Standard(size, 7.0, 12);
+
+    case SINKER:
+        return new Sinker(size, 5.0, 12);
+    }
+}
+
+Bird* BirdFactoryLevel3::factory(BirdType type)
+{
+    int size = 20.0;
+    switch (type)
+    {
+    case STANDARD:
+        return new Standard(size, 5.0, 12);
+
+    case SINKER:
+        return new Sinker(size, 5.0, 12);
+
+    case FLOATER:
+        return new Floater(size);
+    }
+}
+
+Bird* BirdFactoryLevel4::factory(BirdType type)
+{
+    int size = 15.0;
+    switch (type)
+    {
+    case STANDARD:
+        return new Standard(size, 4.0, 12);
+
+    case SINKER:
+        return new Sinker(size, 3.5, 12);
+
+    case FLOATER:
+        return new Floater(size, 4.0, 12);
+
+    case CRAZY:
+        return new Crazy(size);
+    }
+}
