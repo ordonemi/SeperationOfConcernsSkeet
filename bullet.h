@@ -23,7 +23,7 @@ protected:
    static Position dimensions;   // size of the screen
    Position pt;                  // position of the bullet
    Velocity v;                // velocity of the bullet
-   double radius;             // the size (radius) of the bullet
+   double radius;             // the size (radius, Velocity v) of the bullet
    bool dead;                 // is this bullet dead?
    int value;                 // how many points does this cost?
     
