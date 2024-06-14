@@ -18,7 +18,6 @@ public:
    virtual void drawEffects(Position pt, Velocity v, double age = 0, double size = 0  ) = 0;
    virtual void drawPoints(Position pt, int value, float age) = 0;
 
-
 };
 
 /*************************************
