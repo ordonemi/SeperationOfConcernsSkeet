@@ -21,13 +21,14 @@
   <ItemGroup>
     <ClCompile Include="bird.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="drawer.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gun.cpp" />
     <ClCompile Include="points.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="score.cpp" />
-    <ClCompile Include="skeet.cpp" />
+    <ClCompile Include="skeetVisual.cpp" />
     <ClCompile Include="skeetStorage.cpp" />
     <ClCompile Include="skeetLogic.cpp" />
     <ClCompile Include="time.cpp" />
@@ -36,6 +37,7 @@
   <ItemGroup>
     <ClInclude Include="bullet.h" />
     <ClInclude Include="bird.h" />
+    <ClInclude Include="drawer.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="flyer.h" />
     <ClInclude Include="gun.h" />
@@ -43,7 +45,7 @@
     <ClInclude Include="points.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="score.h" />
-    <ClInclude Include="skeet.h" />
+    <ClInclude Include="skeetVisual.h" />
     <ClInclude Include="skeetStorage.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="uiInteract.h" />
