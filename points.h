@@ -29,6 +29,10 @@ public:
    {
 	   return drawer;
    }
+
+   Position getPosition() { return pt; }
+   int getValue() { return value; }
+   float getAge() { return age; }
 private:
    Position pt;
    Velocity v;

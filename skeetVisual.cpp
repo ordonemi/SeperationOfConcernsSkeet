@@ -282,8 +282,8 @@ void SkeetVisual::drawLevel()
          
    // output the birds, bullets, and fragments
    for (auto it = storage.getPointIterator(); it != storage.getPointEnd(); ++it)
-       //(*it)->getDrawer()->draw();
-   for (auto effect : effects)
+       (*it)->getDrawer()->drawPoints((*it)->getPosition(), (*it)->getValue(), (*it)->getAge());
+   for (auto it = storage.getBulletIterator(); it != storage.getBulletEnd(); ++it)
       effect->render();
    for (auto bullet : bullets)
       bullet->output();
