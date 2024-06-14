@@ -14,6 +14,7 @@
 #define WIDTH  800.0
 #define HEIGHT 800.0
 
+Position Flyer::dimensions(WIDTH, HEIGHT);
 Position Bullet::dimensions(WIDTH, HEIGHT);
 Position Bird::dimensions(WIDTH, HEIGHT);
 

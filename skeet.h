@@ -13,6 +13,7 @@
 #include "uiInteract.h"
 #include "bird.h"
 #include "bullet.h"
+#include "flyer.h"
 #include "effect.h"
 #include "gun.h"
 #include "time.h"

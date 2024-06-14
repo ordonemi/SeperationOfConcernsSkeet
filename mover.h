@@ -11,10 +11,16 @@
 
 #include <stdio.h>
 
+class Flyer;
+
 class Mover
 {
 public:
-   virtual void move(Position pt, double radius, Velocity v ) = 0;
+   virtual void move(Position & pt, double radius, Velocity &v, Position dimensions ) = 0;
+   virtual void moveFlyer(Flyer *flyer) = 0;
+   bool isOutOfBounds(Flyer *flyer)const;
+   double randomFloat(double min, double max);
+   int randomInt(int min, int max);
 };
 
 /*************************************
@@ -24,31 +30,31 @@ public:
 class BirdMover : public Mover
 {
 public:
-   virtual void move(Position pt, double radius, Velocity v ) = 0;
+   virtual void moveFlyer(Flyer *flyer) = 0;
 };
 
 class MoveRegular : public BirdMover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void moveFlyer(Flyer *flyer);
 };
 
 class MoveFloater : public BirdMover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void moveFlyer(Flyer *flyer);
 };
 
 class MoveSinker : public BirdMover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void moveFlyer(Flyer *flyer);
 };
 
 class MoveCrazy : public BirdMover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void moveFlyer(Flyer *flyer);
 };
 
 
