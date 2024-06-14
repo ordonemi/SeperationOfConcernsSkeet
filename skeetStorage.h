@@ -1,7 +1,6 @@
 #pragma once
 #include "bird.h"
 #include "gun.h"
-#include "bullet.h"
 #include "effect.h"
 #include "time.h"
 #include "score.h"
@@ -11,15 +10,31 @@
 class Flyer;
 class SkeetStorage
 {
+private:
+	BirdFactoryLevel1 birdFactoryL1;
+	BirdFactoryLevel2 birdFactoryL2;
+	BirdFactoryLevel3 birdFactoryL3;
+	BirdFactoryLevel4 birdFactoryL4;
+
+	std::vector<Flyer*> birds;
+	std::vector<Flyer*> bullets;
+	std::vector<Effect*> effects;
+	std::vector<Points*> points;
+
+	Gun*      gun;
+	Time*     time;
+	Score*    score;
+	HitRatio* hitRatio;
+
 public:
-	void enrollBird(Bird bird);
-	void unenrollBird(Bird bird);
+	void enrollBird  (Flyer* bird);
+	void unenrollBird(Flyer*  bird);
 
-	void enrollBullet(Bullet bullet);
-	void unenrollBullet(Bullet bullet);
+	void enrollBullet  (Flyer* bullet);
+	void unenrollBullet(Flyer* bullet);
 
-	void enrollEffects(Effect effect);
-	void unenrollPoint(Score score);
+	void enrollEffects(Effect* effect);
+	void unenrollPoint(Score* score);
 
 	std::vector<Flyer*>::iterator getBirdIterator()
 	{
@@ -62,81 +77,14 @@ public:
 	}
 
 	BirdFactory getBirdFactory();
-
-	int getLevel() const
+	int getLevel()
 	{
-		return time.level();
+		return time->level();
 	}
 
 	int getBirdsSize()
 	{
 		return birds.size();
 	}
-
-	bool isPlaying()
-	{
-		return time.isPlaying();
-	}
-
-	bool isGameOver() const
-	{
-		return time.isGameOver();
-	}
-
-	Position getDimension() const
-	{
-		return dimensions;
-	}
-
-	double getPercentLeft() const
-	{
-		return time.percentLeft();
-	}
-
-	int secondsLeft() const
-	{
-		return time.secondsLeft();
-	}
-
-	std::string getScoreText() const
-	{
-		return score.getText();
-	}
-
-	double getGunAngle() const
-	{
-		return gun.getAngle();
-	}
-
-	Position getGunPt() const
-	{
-		return gun.getPt();
-	}
-
-	std::string getTimeText()
-	{
-		return time.getText();
-	}
-
-	std::string getHitRatioText()
-	{
-		return hitRatio.getText();
-	}
-private:
-	BirdFactoryLevel1 birdFactoryL1;
-	BirdFactoryLevel2 birdFactoryL2;
-	BirdFactoryLevel3 birdFactoryL3;
-	BirdFactoryLevel4 birdFactoryL4;
-
-	std::vector<Flyer*> birds;
-	std::vector<Flyer*> bullets;
-	std::vector<Effect*> effects;
-	std::vector<Points*> points;
-
-	Gun      gun;
-	Time     time;
-	Score    score;
-	HitRatio hitRatio;
-	Position dimensions;
 };
 

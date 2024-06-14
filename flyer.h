@@ -9,6 +9,8 @@
 
 #pragma once
 #include "position.h"
+#include "drawer.h"
+#include "mover.h"
 // INCLUDE DRAWER AND MOVER HEADER FILES
 
 /******************************************
@@ -19,17 +21,17 @@ class Flyer
 {
 private:
 	static Position dimensions; // size of the screen
-	Position pt;                  // position of the flyer
-	Velocity v;                // velocity of the flyer
-	double radius;             // the size (radius) of the flyer
-	bool dead;                 // is this flyer dead?
-	int points;                // how many points is this worth?
+	Position pt;                // position of the flyer
+	Velocity v;                 // velocity of the flyer
+	double radius;              // the size (radius) of the flyer
+	bool dead;                  // is this flyer dead?
+	int points;                 // how many points is this worth?
 	Type type;
-	//Drawer drawer;
-	//Mover mover;
+	Drawer* drawer;
+	Mover* mover;
 public:
 public:
-	Flyer(Type id) : dead(false), points(0), radius(1.0) { type = id; }
+	Flyer(Type id) : dead(false), points(0), radius(1.0), drawer(nullptr), mover(nullptr) { type = id; }
 
 	// setters
 	void operator=(const Position& rhs) { pt = rhs; }
@@ -44,8 +46,19 @@ public:
 	double getRadius()      const { return radius; }
 	int getPoints() const { return points; }
 	Type getType() const { return type; }
-	//Drawer& getDrawer() const { return *drawer; }
-	//Mover& getMover() const { return *mover; }
+	Drawer* getDrawer() const { return drawer; }
+	Mover* getMover() const { return mover; }
+	Position getDimension() const { return dimensions;  }
+
+	bool isDead()            { return dead;       }
+	Position getPosition()   { return pt;         }
+	Velocity getVelocity()   { return v;          }
+	double getRadius()       { return radius;     }
+	int getPoints()          { return points;     }
+	Type getType()           { return type;       }
+	Drawer* getDrawer()      { return drawer;     }
+	Mover* getMover()        { return mover;      }
+	Position getDimension()  { return dimensions; }
 
 
 	bool isOutOfBounds() const
@@ -57,5 +70,5 @@ public:
 
 enum Type
 {
-	STANDARD, FLOATER, SINKER, CRAZY;
+	STANDARD, FLOATER, SINKER, CRAZY
 };
