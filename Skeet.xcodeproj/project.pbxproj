@@ -20,6 +20,8 @@
 		C1D4EAED2577F57B002B56E3 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE52577F576002B56E3 /* uiInteract.cpp */; };
 		C1D4EAF22577F58C002B56E3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EAF02577F58C002B56E3 /* GLUT.framework */; };
 		C1D4EAF32577F58C002B56E3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EAF12577F58C002B56E3 /* OpenGL.framework */; };
+		E728ACE32C18B92500E01E0D /* drawer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E728ACE12C18B92500E01E0D /* drawer.cpp */; };
+		E74885482C1B559600B31C4E /* mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E74885462C1B559600B31C4E /* mover.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,6 +61,10 @@
 		C1D4EAE62577F578002B56E3 /* uiInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiInteract.h; sourceTree = "<group>"; };
 		C1D4EAF02577F58C002B56E3 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C1D4EAF12577F58C002B56E3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E728ACE12C18B92500E01E0D /* drawer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawer.cpp; sourceTree = "<group>"; };
+		E728ACE22C18B92500E01E0D /* drawer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drawer.h; sourceTree = "<group>"; };
+		E74885462C1B559600B31C4E /* mover.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mover.cpp; sourceTree = "<group>"; };
+		E74885472C1B559600B31C4E /* mover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mover.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,10 @@
 		C1D4EACA2577F487002B56E3 = {
 			isa = PBXGroup;
 			children = (
+				E74885462C1B559600B31C4E /* mover.cpp */,
+				E74885472C1B559600B31C4E /* mover.h */,
+				E728ACE12C18B92500E01E0D /* drawer.cpp */,
+				E728ACE22C18B92500E01E0D /* drawer.h */,
 				C10803202AAF7E11005CEA4E /* points.cpp */,
 				C108031F2AAF7E11005CEA4E /* points.h */,
 				C16B8F532744AFD8009CC1DC /* score.h */,
@@ -176,11 +186,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E728ACE32C18B92500E01E0D /* drawer.cpp in Sources */,
 				C16B8F522744ABDE009CC1DC /* score.cpp in Sources */,
 				C1D4EAED2577F57B002B56E3 /* uiInteract.cpp in Sources */,
 				C10803212AAF7E11005CEA4E /* points.cpp in Sources */,
 				C184132A273E9C4900143AB2 /* bullet.cpp in Sources */,
 				C15451E627403ED30095997B /* effect.cpp in Sources */,
+				E74885482C1B559600B31C4E /* mover.cpp in Sources */,
 				C184132C273E9C4900143AB2 /* bird.cpp in Sources */,
 				C1D4EAEA2577F57B002B56E3 /* position.cpp in Sources */,
 				C16F25492716733A000FA407 /* time.cpp in Sources */,

@@ -20,7 +20,7 @@ protected:
    static Position dimensions; // size of the screen
    Position pt;                  // position of the flyer
    Velocity v;                // velocity of the flyer
-   double radius;             // the size (radius) of the flyer
+   double radius;             // the size (radius, Velocity v) of the flyer
    bool dead;                 // is this flyer dead?
    int points;                // how many points is this worth?
    

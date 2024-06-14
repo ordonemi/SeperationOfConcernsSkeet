@@ -19,9 +19,8 @@ private:
 
 	std::vector<Flyer*> birds;
 	std::vector<Flyer*> bullets;
-	std::vector<Effect> effects;
-	std::vector<Points> points;
-	std::vector<BirdFactory> levels;
+	std::vector<Effect*> effects;
+	std::vector<Points*> points;
 
 	Bird*     bird;
 	Gun*      gun;
@@ -39,11 +38,55 @@ public:
 	void enrollEffects(Effect effect);
 	void unenrollPoint(Score score);
 
-	void getBirdIterator();
-	void getBulletIterator();
-	void getEffectIterator();
-	void getPointIterator();
+	std::vector<Flyer*>::iterator getBirdIterator()
+	{
+		return birds.begin();
+	}
+
+	std::vector<Flyer*>::iterator getBirdEnd()
+	{
+		return birds.end();
+	}
+
+	std::vector<Flyer*>::iterator getBulletIterator()
+	{
+		return bullets.begin();
+	}
+
+	std::vector<Flyer*>::iterator getBulletEnd()
+	{
+		return bullets.end();
+	}
+
+	std::vector<Effect*>::iterator getEffectIterator()
+	{
+		return effects.begin();
+	}
+
+	std::vector<Effect*>::iterator getEffectEnd()
+	{
+		return effects.end();
+	}
+
+	std::vector<Points*>::iterator getPointIterator()
+	{
+		return points.begin();
+	}
+
+	std::vector<Points*>::iterator getPointEnd()
+	{
+		return points.end();
+	}
 
 	BirdFactory getBirdFactory();
+	int getLevel()
+	{
+		return time->level();
+	}
+
+	int getBirdsSize()
+	{
+		return birds.size();
+	}
 };
 

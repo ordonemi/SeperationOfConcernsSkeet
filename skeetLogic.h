@@ -8,7 +8,7 @@
  ************************************************************************/
 
 #pragma once
-// INCLUDE STORAGE HEADER FILE
+#include "skeetStorage.h"
 
 class SkeetLogic
 {
@@ -18,5 +18,5 @@ public:
 	void spawn();
 	void fire();
 private:
-	//SkeetStorage storage;
+	SkeetStorage storage;
 };
