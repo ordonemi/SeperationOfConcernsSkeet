@@ -1,7 +1,6 @@
 #pragma once
 #include "bird.h"
 #include "gun.h"
-#include "bullet.h"
 #include "effect.h"
 #include "time.h"
 #include "score.h"
@@ -22,7 +21,6 @@ private:
 	std::vector<Effect*> effects;
 	std::vector<Points*> points;
 
-	Bird*     bird;
 	Gun*      gun;
 	Time*     time;
 	Score*    score;
@@ -30,13 +28,13 @@ private:
 
 public:
 	void enrollBird  (Flyer* bird);
-	void unenrollBird(Flyer* bird);
+	void unenrollBird(Flyer*  bird);
 
-	void enrollBullet  (Bullet bullet);
-	void unenrollBullet(Bullet bullet);
+	void enrollBullet  (Flyer* bullet);
+	void unenrollBullet(Flyer* bullet);
 
-	void enrollEffects(Effect effect);
-	void unenrollPoint(Score score);
+	void enrollEffects(Effect* effect);
+	void unenrollPoint(Score* score);
 
 	std::vector<Flyer*>::iterator getBirdIterator()
 	{
