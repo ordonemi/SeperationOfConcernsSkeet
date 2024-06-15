@@ -12,9 +12,12 @@
 #include <stdio.h>
 
 class Flyer;
+class SkeetStorage;
 
 class Mover
 {
+private:
+
 public:
    virtual void move(Position & pt, double radius, Velocity &v, Position dimensions ) = 0;
    virtual void moveFlyer(Flyer *flyer) = 0;
@@ -65,39 +68,48 @@ public:
 class BulletMover : public Mover
 {
 public:
-   virtual void move(Position pt, double radius, Velocity v ) = 0;
+   virtual void moveFlyer(Flyer *flyer) = 0;
 };
 
 class MovePellet : public BulletMover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void moveFlyer(Flyer *flyer);
 };
 
 class MoveBomb : public BulletMover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void moveFlyer(Flyer *flyer);
 };
 
 class MoveShrapnel : public BulletMover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void moveFlyer(Flyer *flyer);
 };
 
 class MoveMissile : public BulletMover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void moveFlyer(Flyer *flyer);
 };
 
+
+/*************************************
+ * POINT DRAWER is the class in charge of moving the points
+ **************************************/
 
 class PointMover : public Mover
 {
 public:
    void move(Position pt, double radius, Velocity v );
 };
+
+/*************************************
+ * EFFECT DRAWER is the base class
+ * for all the classes to move different effects
+ **************************************/
 
 class EffectMover : public Mover
 {

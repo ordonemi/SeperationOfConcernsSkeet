@@ -34,20 +34,36 @@ bool Mover::isOutOfBounds(Flyer *flyer)const
            flyer->getPosition().getY() < -flyer->getRadius() || flyer->getDimension().getY() >= flyer->getDimension().getY() + flyer->getRadius());
 }
 
+/***************************************************************/
+/***************************************************************/
+/*            BULLET DRAWER              */
+/***************************************************************/
+/***************************************************************/
 
-void MovePellet ::move(Position pt, double radius, Velocity v )
+void MovePellet ::moveFlyer(Flyer *flyer)
+{
+   // inertia
+   flyer->getPosition().add(flyer->getVelocity());
+
+   // out of bounds checker
+   if (isOutOfBounds(flyer))
+      flyer->kill();
+};
+
+void MoveBomb :: moveFlyer(Flyer *flyer)
+{
+   // kill if it has been around too long
+   flyer->lowerTimeToDie();
+   if (!flyer->getTimeToDie())
+       flyer->kill();
+   
+};
+
+void MoveShrapnel :: moveFlyer(Flyer *flyer)
 {
 };
 
-void MoveBomb :: move(Position pt, double radius, Velocity v )
-{
-};
-
-void MoveShrapnel :: move(Position pt, double radius, Velocity v )
-{
-};
-
-void MoveMissile :: move(Position pt, double radius, Velocity v )
+void MoveMissile :: moveFlyer(Flyer *flyer)
 {
 };
 
@@ -60,6 +76,11 @@ void EffectMover :: move(Position pt, double radius, Velocity v )
 {
 };
 
+/***************************************************************/
+/***************************************************************/
+/*            BIRD DRAWER              */
+/***************************************************************/
+/***************************************************************/
 
 void MoveRegular :: moveFlyer(Flyer *flyer)
 {
