@@ -9,6 +9,7 @@
 
 #pragma once
 #include "position.h"
+#include "mover.h"
 
 /**********************
  * Effect: stuff that is not interactive
@@ -19,6 +20,7 @@ protected:
     Position pt;      // location of the effect
     double age;    // 1.0 = new, 0.0 = dead
     Drawer* drawer;
+    Mover* mover;
 public:
     // create a fragment based on the velocity and position of the bullet
     Effect(const Position & pt) : pt(pt), age(0.5) {}
@@ -33,6 +35,8 @@ public:
     bool isDead() const { return age <= 0.0; }
 
     Drawer* getDrawer() { return drawer; }
+    Mover* getMover() { return mover; }
+
 };
 
 /**********************

@@ -388,7 +388,7 @@ void SkeetVisual::interact(const UserInput & ui)
 
    // add something if something has been added
    if (nullptr != p)
-       storage.enrollBullet(p);
+       logic.fire(p);
    
    // send movement information to all the bullets. Only the missile cares.
    for (auto it = storage.getBulletIterator(); it != storage.getBulletEnd(); ++it)

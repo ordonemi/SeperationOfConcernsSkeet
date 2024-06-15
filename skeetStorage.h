@@ -1,5 +1,4 @@
 #pragma once
-#include "bird.h"
 #include "gun.h"
 #include "effect.h"
 #include "time.h"
@@ -65,5 +64,40 @@ public:
 		score.reset();
 		hitRatio.reset();
 	}
+};
+
+enum Type
+{
+	STANDARD, FLOATER, SINKER, CRAZY, BULLET, MISSILE
+};
+
+class BirdFactory
+{
+public:
+	virtual Flyer* factory(Type type)
+};
+
+class BirdFactoryLevel1 : public BirdFactory
+{
+public:
+	Flyer* factory(Type type) override;
+};
+
+class BirdFactoryLevel2 : public BirdFactory
+{
+public:
+	Flyer* factory(Type type) override;
+};
+
+class BirdFactoryLevel3 : public BirdFactory
+{
+public:
+	Flyer* factory(Type type) override;
+};
+
+class BirdFactoryLevel4 : public BirdFactory
+{
+public:
+	Flyer* factory(Type type) override;
 };
 

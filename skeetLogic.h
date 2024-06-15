@@ -16,7 +16,7 @@ public:
 	void move();
 	void animate(); // Flyer& it
 	void spawn();
-	void fire();
+	void fire(Flyer* p);
 private:
 	SkeetStorage storage;
 };

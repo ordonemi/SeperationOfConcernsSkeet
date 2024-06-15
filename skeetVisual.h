@@ -7,6 +7,7 @@
  *    The interface component of the game
  ************************************************************************/
 #include "skeetStorage.h"
+#include "skeetLogic.h"
 #include "flyer.h"
 #include "uiInteract.h"
 #pragma once
@@ -40,6 +41,7 @@ public:
 
 private:
     SkeetStorage storage;
+    SkeetLogic logic;
     bool bullseye;
     UserInput ui;
 

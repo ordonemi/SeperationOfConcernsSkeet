@@ -1,4 +1,5 @@
 #include "skeetStorage.h"
+#include "flyer.h"
 
 BirdFactory SkeetStorage::getBirdFactory()
 {
@@ -59,3 +60,97 @@ void SkeetStorage::unenrollPoint(Score* score)
 		points.erase(it);
 	}
 }
+
+Flyer* BirdFactory::factory(Type type)
+{
+    return nullptr;
+}
+
+Flyer* BirdFactoryLevel1::factory(Type type)
+{
+    double size = 30.0;
+    switch (type)
+    {
+    case STANDARD:
+        Flyer* f = new Flyer(size, 7.0, 12);
+        f->setDrawer(new DrawRegular());
+        f->setMover(new MoveRegular());
+        return f;
+    }
+}
+
+Flyer* BirdFactoryLevel2::factory(Type type)
+{
+    int size = 25.0;
+    switch (type)
+    {
+    case STANDARD:
+        Flyer* f = new Flyer(size, 7.0, 12);
+        f->setDrawer(new DrawRegular());
+        f->setMover(new MoveRegular());
+        return f;
+
+    case SINKER:
+        Flyer* f = new Flyer(size, 7.0, 12);
+        f->setDrawer(new DrawSinker());
+        f->setMover(new MoveSinker());
+        return f;
+    }
+}
+
+Flyer* BirdFactoryLevel3::factory(Type type)
+{
+    int size = 20.0;
+    switch (type)
+    {
+    case STANDARD:
+        Flyer* f = new Flyer(size, 7.0, 12);
+        f->setDrawer(new DrawRegular());
+        f->setMover(new MoveRegular());
+        return f;
+
+    case SINKER:
+        Flyer* f = new Flyer(size, 7.0, 12);
+        f->setDrawer(new DrawSinker());
+        f->setMover(new MoveSinker());
+        return f;
+
+    case FLOATER:
+        Flyer* f = new Flyer(size, 7.0, 12);
+        f->setDrawer(new DrawFloater());
+        f->setMover(new MoveFloater());
+        return f;
+    }
+}
+
+Flyer* BirdFactoryLevel4::factory(Type type)
+{
+    int size = 15.0;
+    switch (type)
+    {
+    case STANDARD:
+        Flyer* f = new Flyer(size, 4.0, 12);
+        f->setDrawer(new DrawRegular());
+        f->setMover(new MoveRegular());
+        return f;
+
+    case SINKER:
+        Flyer* f = new Flyer(size, 3.5, 12);
+        f->setDrawer(new DrawSinker());
+        f->setMover(new MoveSinker());
+        return f;
+
+    case FLOATER:
+        Flyer* f = new Flyer(size, 4.0, 12);
+        f->setDrawer(new DrawFloater());
+        f->setMover(new MoveFloater());
+        return f;
+
+    case CRAZY:
+        Flyer* f = new Flyer(size);
+        f->setDrawer(new DrawCrazy());
+        f->setMover(new MoveCrazy());
+        return f;
+    }
+}
+

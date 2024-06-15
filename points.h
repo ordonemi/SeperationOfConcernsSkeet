@@ -22,6 +22,7 @@ class Points
 public:
    Points(const Position& pt, int value);
    PointDrawer* drawer;
+   PointMover* mover;
    void update();
    bool isDead() const {return age <= 0.0; }
 
@@ -29,6 +30,8 @@ public:
    {
 	   return drawer;
    }
+
+   PointMover* getMover() { return mover; }
 
    Position getPosition() { return pt; }
    int getValue() { return value; }
