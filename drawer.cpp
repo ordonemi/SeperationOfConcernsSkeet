@@ -7,29 +7,32 @@
 
 #define GL_SILENCE_DEPRECATION
 #include "drawer.h"
+#include "points.h"
+#include "effect.h"
+#include "flyer.h"
 #include <cassert>
 #include <openGL/gl.h>    // Main OpenGL library
 #include <GLUT/glut.h>    // Second OpenGL library
 #define GLUT_TEXT GLUT_BITMAP_HELVETICA_18
 
-void PointDrawer :: drawPoints(Position pt, int value, float age)
+void PointDrawer :: draw(Points* point)
 {
-   if (value == 0)
+   if (point->getValue() == 0)
       return;
 
    void* pFont = GLUT_TEXT;
 
    // set the color
-   GLfloat red   = (value <= 0.0 ? 1.0 : 0.0) * age;
-   GLfloat green = (value <= 0.0 ? 0.0 : 1.0) * age;
+   GLfloat red   = (point->getValue() <= 0.0 ? 1.0 : 0.0) * point->getAge();
+   GLfloat green = (point->getValue() <= 0.0 ? 0.0 : 1.0) * point->getAge();
    GLfloat blue  = 0.0;
    glColor3f(red, green, blue);
 
    // specify the position
-   glRasterPos2f((GLfloat)pt.getX(), (GLfloat)pt.getY());
+   glRasterPos2f((GLfloat)point->getPosition().getX(), (GLfloat)point->getPosition().getY());
 
    // draw the digits
-   int number = (value > 0 ? value : -value);
+   int number = (point->getValue() > 0 ? point->getValue() : -point->getValue());
    if (number / 10 != 0)
       glutBitmapCharacter(pFont, (char)(number / 10) + '0');
    glutBitmapCharacter(pFont, (char)(number % 10) + '0');
@@ -42,48 +45,52 @@ void PointDrawer :: drawPoints(Position pt, int value, float age)
 /***************************************************************/
 /***************************************************************/
 
-void DrawFragment :: drawEffects(Position pt, Velocity v, double age, double size, Position ptEnd)
+void DrawFragment :: draw(Effect* effect)
 {
+   
+   Fragment * fragment = dynamic_cast<Fragment*>(effect);
+   
    // Draw this sucker
    glBegin(GL_TRIANGLE_FAN);
    
    // the color is a function of age - fading to black
-   glColor3f((GLfloat)age, (GLfloat)age, (GLfloat)age);
+   glColor3f((GLfloat)fragment->getAge(), (GLfloat)fragment->getAge(), (GLfloat)effect->getAge());
    
    // draw the fragment
-   glVertex2f((GLfloat)(pt.getX() - size), (GLfloat)(pt.getY() - size));
-   glVertex2f((GLfloat)(pt.getX() + size), (GLfloat)(pt.getY() - size));
-   glVertex2f((GLfloat)(pt.getX() + size), (GLfloat)(pt.getY() + size));
-   glVertex2f((GLfloat)(pt.getX() - size), (GLfloat)(pt.getY() + size));
+   glVertex2f((GLfloat)(fragment->getPosition().getX() - fragment->getSize()), (GLfloat)(fragment->getPosition().getY() - fragment->getSize()));
+   glVertex2f((GLfloat)(fragment->getPosition().getX() + fragment->getSize()), (GLfloat)(fragment->getPosition().getY() - fragment->getSize()));
+   glVertex2f((GLfloat)(fragment->getPosition().getX() + fragment->getSize()), (GLfloat)(fragment->getPosition().getY() + fragment->getSize()));
+   glVertex2f((GLfloat)(fragment->getPosition().getX() - fragment->getSize()), (GLfloat)(fragment->getPosition().getY() + fragment->getSize()));
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
 };
 
-void DrawStreek :: drawEffects(Position pt, Velocity v, double age, double size, Position ptEnd)
+void DrawStreek :: draw(Effect* effect)
 {
+   Streek * streek = dynamic_cast<Streek*>(effect);
    // Draw this sucker
    glBegin(GL_LINES);
-   glColor3f((GLfloat)age, (GLfloat)age, (GLfloat)age);
+   glColor3f((GLfloat)streek->getAge(), (GLfloat)streek->getAge(), (GLfloat)streek->getAge());
 
    // Draw the actual line
-   glVertex2f((GLfloat)pt.getX(), (GLfloat)pt.getY());
-   glVertex2f((GLfloat)ptEnd.getX(), (GLfloat)ptEnd.getY());
+   glVertex2f((GLfloat)streek->getPosition().getX(), (GLfloat)streek->getPosition().getY());
+   glVertex2f((GLfloat)streek->getPtEnd().getX(), (GLfloat)streek->getPtEnd().getY());
 
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
    
 };
 
-void DrawExhaust :: drawEffects(Position pt, Velocity v, double age, double size, Position ptEnd)
+void DrawExhaust :: draw(Effect* effect)
 {
-   
+   Exhaust * exhaust = dynamic_cast<Exhaust*>(effect);
    // Draw this sucker
    glBegin(GL_LINES);
-   glColor3f((GLfloat)age, (GLfloat)age, (GLfloat)age);
+   glColor3f((GLfloat)exhaust->getAge(), (GLfloat)exhaust->getAge(), (GLfloat)exhaust->getAge());
 
    // Draw the actual line
-   glVertex2f((GLfloat)pt.getX(), (GLfloat)pt.getY());
-   glVertex2f((GLfloat)ptEnd.getX(), (GLfloat)ptEnd.getY());
+   glVertex2f((GLfloat)exhaust->getPosition().getX(), (GLfloat)exhaust->getPosition().getY());
+   glVertex2f((GLfloat)exhaust->getPtEnd().getX(), (GLfloat)exhaust->getPtEnd().getY());
 
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
@@ -149,31 +156,31 @@ void BulletDrawer :: drawDot(const Position& point, double radius,
 
 
 
-void DrawPellet ::draw(Position pt, double radius, Velocity v )
+void DrawPellet ::draw(Flyer* flyer)
 {
-   drawDot(pt, 3.0, 1.0, 1.0, 0.0);
+   drawDot(flyer->getPosition(), 3.0, 1.0, 1.0, 0.0);
 };
 
-void DrawBomb :: draw(Position pt, double radius, Velocity v )
+void DrawBomb ::draw(Flyer* flyer)
 {
-   drawDot(pt, radius + 2.0, 0.50, 0.50, 0.00);
-   drawDot(pt, radius + 1.0, 0.75, 0.75, 0.00);
-   drawDot(pt, radius + 0.0, 0.87, 0.87, 0.00);
-   drawDot(pt, radius - 1.0, 1.00, 1.00, 0.00);
+   drawDot(flyer->getPosition(), flyer->getRadius() + 2.0, 0.50, 0.50, 0.00);
+   drawDot(flyer->getPosition(), flyer->getRadius() + 1.0, 0.75, 0.75, 0.00);
+   drawDot(flyer->getPosition(), flyer->getRadius() + 0.0, 0.87, 0.87, 0.00);
+   drawDot(flyer->getPosition(), flyer->getRadius() - 1.0, 1.00, 1.00, 0.00);
 };
 
-void DrawShrapnel :: draw(Position pt, double radius, Velocity v )
+void DrawShrapnel :: draw(Flyer* flyer)
 {
-   drawDot(pt, radius, 1.0, 1.0, 0.0);
+   drawDot(flyer->getPosition(), flyer->getRadius(), 1.0, 1.0, 0.0);
 };
 
-void DrawMissile :: draw(Position pt, double radius, Velocity v )
+void DrawMissile :: draw(Flyer* flyer)
 {
    // missile is a line with a dot at the end so it looks like fins.
-   Position ptNext(pt);
-   ptNext.add(v);
-   drawLine(pt, ptNext, 1.0, 1.0, 0.0);
-   drawDot(pt, 3.0, 1.0, 1.0, 1.0);
+   Position ptNext(flyer->getPosition());
+   ptNext.add(flyer->getVelocity());
+   drawLine(flyer->getPosition(), ptNext, 1.0, 1.0, 0.0);
+   drawDot(flyer->getPosition(), 3.0, 1.0, 1.0, 1.0);
 };
 
 
@@ -223,29 +230,29 @@ void BirdDrawer :: drawDisk(const Position& center, double radius,
 
 
 
-void DrawRegular :: draw(Position pt, double radius, Velocity v )
+void DrawRegular :: draw(Flyer* flyer)
 {
-   drawDisk(pt, radius - 0.0, 1.0, 1.0, 1.0); // white outline
-   drawDisk(pt, radius - 3.0, 0.0, 0.0, 1.0); // blue center
+   drawDisk(flyer->getPosition(), flyer->getRadius() - 0.0, 1.0, 1.0, 1.0); // white outline
+   drawDisk(flyer->getPosition(), flyer->getRadius() - 3.0, 0.0, 0.0, 1.0); // blue center
 };
 
-void DrawFloater :: draw(Position pt, double radius, Velocity v )
+void DrawFloater :: draw(Flyer* flyer)
 {
-   drawDisk(pt, radius - 0.0, 0.0, 0.0, 1.0); // blue outline
-   drawDisk(pt, radius - 4.0, 1.0, 1.0, 1.0); // white center
+   drawDisk(flyer->getPosition(), flyer->getRadius() - 0.0, 0.0, 0.0, 1.0); // blue outline
+   drawDisk(flyer->getPosition(), flyer->getRadius() - 4.0, 1.0, 1.0, 1.0); // white center
 };
 
-void DrawSinker :: draw(Position pt, double radius, Velocity v )
+void DrawSinker :: draw(Flyer* flyer)
 {
-   drawDisk(pt, radius - 0.0, 0.0, 0.0, 0.8);
-   drawDisk(pt, radius - 4.0, 0.0, 0.0, 0.0);
+   drawDisk(flyer->getPosition(), flyer->getRadius() - 0.0, 0.0, 0.0, 0.8);
+   drawDisk(flyer->getPosition(), flyer->getRadius() - 4.0, 0.0, 0.0, 0.0);
 };
 
-void DrawCrazy :: draw(Position pt, double radius, Velocity v )
+void DrawCrazy :: draw(Flyer* flyer)
 {
-   drawDisk(pt, radius * 1.0, 0.0, 0.0, 1.0); // bright blue outside
-   drawDisk(pt, radius * 0.8, 0.2, 0.2, 1.0);
-   drawDisk(pt, radius * 0.6, 0.4, 0.4, 1.0);
-   drawDisk(pt, radius * 0.4, 0.6, 0.6, 1.0);
-   drawDisk(pt, radius * 0.2, 0.8, 0.8, 1.0); // almost white inside
+   drawDisk(flyer->getPosition(), flyer->getRadius() * 1.0, 0.0, 0.0, 1.0); // bright blue outside
+   drawDisk(flyer->getPosition(), flyer->getRadius() * 0.8, 0.2, 0.2, 1.0);
+   drawDisk(flyer->getPosition(), flyer->getRadius() * 0.6, 0.4, 0.4, 1.0);
+   drawDisk(flyer->getPosition(), flyer->getRadius() * 0.4, 0.6, 0.6, 1.0);
+   drawDisk(flyer->getPosition(), flyer->getRadius() * 0.2, 0.8, 0.8, 1.0); // almost white inside
 };

@@ -38,7 +38,11 @@ public:
 
     Drawer* getDrawer() { return drawer; }
     Mover* getMover() { return mover; }
+    double getAge()     {return age;}
+    Position getPosition() {return pt;}
+   
     void setPosition(Position pos) { pt = pos; }
+    
     
     void updatePosition(Velocity v) { pt += v;}
     void updateAge(float n) { age -= n;}
@@ -66,6 +70,7 @@ public:
    void fly();
    void setVelocity();
    
+   double getSize() { return size;}
    Velocity getVelocity() const{ return v;};
    void increaseSize(double n) { size *= n;};
 };
@@ -86,6 +91,8 @@ public:
     
     // move it forward with regards to inertia. Let it age
     void fly();
+   
+    Position getPtEnd() { return ptEnd;}
 };
 
 /**********************
@@ -105,4 +112,6 @@ public:
     
     // move it forward with regards to inertia. Let it age
     void fly();
+ 
+    Position getPtEnd() { return ptEnd;}
 };
