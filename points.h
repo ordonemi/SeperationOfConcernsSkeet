@@ -12,6 +12,7 @@
 
 #include "position.h"
 #include "drawer.h"
+#include "mover.h"
 
  /*********************************************
   * POINTS
@@ -32,10 +33,11 @@ public:
    }
 
    PointMover* getMover() { return mover; }
+   Velocity& getVelocity(){ return v;     }
 
    Position getPosition() { return pt; }
    int getValue() { return value; }
-   float getAge() { return age; }
+   float& getAge() { return age; }
 private:
    Position pt;
    Velocity v;
