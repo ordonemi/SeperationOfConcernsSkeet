@@ -10,6 +10,7 @@
 #include "flyer.h"
 #include "skeetStorage.h"
 #include "effect.h"
+#include "points.h"
 
 
 /******************************************************************
@@ -43,7 +44,7 @@ bool Mover::isOutOfBounds(Flyer *flyer)const
 /***************************************************************/
 /***************************************************************/
 
-void BulletMover :: moveFlyer(Flyer *flyer)
+void BulletMover :: move(Flyer *flyer)
 {
    // inertia
    flyer->getPosition().add(flyer->getVelocity());
@@ -53,23 +54,23 @@ void BulletMover :: moveFlyer(Flyer *flyer)
       flyer->kill();
 }
 
-void MovePellet ::moveFlyer(Flyer *flyer)
+void MovePellet ::move(Flyer *flyer)
 {
-   BulletMover :: moveFlyer(flyer);
+   BulletMover :: move(flyer);
 };
 
-void MoveBomb :: moveFlyer(Flyer *flyer)
+void MoveBomb :: move(Flyer *flyer)
 {
    // kill if it has been around too long
    flyer->lowerTimeToDie();
    if (!flyer->getTimeToDie())
        flyer->kill();
    
-   BulletMover::moveFlyer(flyer);
+   BulletMover::move(flyer);
    
 };
 
-void MoveShrapnel :: moveFlyer(Flyer *flyer)
+void MoveShrapnel :: move(Flyer *flyer)
 {
    // kill if it has been around too long
    flyer->lowerTimeToDie();
@@ -80,24 +81,65 @@ void MoveShrapnel :: moveFlyer(Flyer *flyer)
    storage->enrollEffects(new Streek (flyer->getPosition(), flyer->getVelocity()));
    
    // do the usual bullet stuff (like inertia)
-   BulletMover::moveFlyer(flyer);
+   BulletMover::move(flyer);
 };
 
-void MoveMissile :: moveFlyer(Flyer *flyer)
+void MoveMissile :: move(Flyer *flyer)
 {
    // add an exhoust
    storage->enrollEffects(new Exhaust (flyer->getPosition(), flyer->getVelocity()));
    // do the usual bullet stuff (like inertia)
-   BulletMover::moveFlyer(flyer);
+   BulletMover::move(flyer);
 };
 
+/***************************************************************/
+/***************************************************************/
+/*            POINT MOVER                */
+/***************************************************************/
+/***************************************************************/
 
-void PointMover :: move(Position pt, double radius, Velocity v )
+
+void PointMover :: move(Points *point)
 {
+   point->getVelocity().addDx(randomFloat(-0.15, 0.15));
+   point->getVelocity().addDy(randomFloat(-0.15, 0.15));
+   point->getPosition() += point->getVelocity();
+   point->getAge() -= 0.01;
 };
 
-void EffectMover :: move(Position pt, double radius, Velocity v )
+/***************************************************************/
+/***************************************************************/
+/*            EFFECT MOVER                */
+/***************************************************************/
+/***************************************************************/
+
+void MoveStreek :: move(Effect *effect)
 {
+   // move it forward with inertia (no gravity)
+//    pt += v;
+   
+  // increase the age so it fades away
+   effect->updateAge(0.10);
+};
+
+void MoveFragment :: move(Effect *effect)
+{
+   Fragment * fragment = dynamic_cast<Fragment*>(effect);
+   // move it forward with inertia (no gravity)
+   fragment->updatePosition(fragment->getVelocity());
+   
+   // increase the age so it fades away
+   effect->updateAge(0.02);
+   fragment->increaseSize(0.95);
+};
+
+void MoveExhaust ::move(Effect *effect)
+{
+   // move it forward with inertia (no gravity)
+//   pt += v;
+    
+   // increase the age so it fades away
+   effect->updateAge(0.025);
 };
 
 /***************************************************************/
@@ -106,7 +148,7 @@ void EffectMover :: move(Position pt, double radius, Velocity v )
 /***************************************************************/
 /***************************************************************/
 
-void MoveRegular :: moveFlyer(Flyer *flyer)
+void MoveRegular :: move(Flyer *flyer)
 {
    // small amount of drag
    flyer->getVelocity() *= 0.995;
@@ -122,7 +164,7 @@ void MoveRegular :: moveFlyer(Flyer *flyer)
    }
 };
 
-void MoveFloater :: moveFlyer(Flyer *flyer)
+void MoveFloater :: move(Flyer *flyer)
 {
    // large amount of drag
    flyer->getVelocity() *= 0.990;
@@ -141,7 +183,7 @@ void MoveFloater :: moveFlyer(Flyer *flyer)
    }
 };
 
-void MoveSinker :: moveFlyer(Flyer *flyer)
+void MoveSinker :: move(Flyer *flyer)
 {
    // gravity
    flyer->getVelocity().addDy(-0.07);
@@ -157,7 +199,7 @@ void MoveSinker :: moveFlyer(Flyer *flyer)
    }
 };
 
-void MoveCrazy :: moveFlyer(Flyer *flyer)
+void MoveCrazy :: move(Flyer *flyer)
 {
    // erratic turns eery half a second or so
    if (randomInt(0, 15) == 0)

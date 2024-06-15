@@ -39,6 +39,9 @@ public:
     Drawer* getDrawer() { return drawer; }
     Mover* getMover() { return mover; }
     void setPosition(Position pos) { pt = pos; }
+    
+    void updatePosition(Velocity v) { pt += v;}
+    void updateAge(float n) { age -= n;}
 
 
 };
@@ -53,17 +56,19 @@ private:
    Velocity v;    // direction the fragment is flying
    double size;   // size of the fragment
 public:
-    // create a fragment based on the velocity and position of the bullet
-    Fragment(const Position & pt, const Velocity & v);
-    
-    // draw it
-    void render() const;
-    
-    // move it forward with regards to inertia. Let it age
-    void fly();
-    void setVelocity();
+   // create a fragment based on the velocity and position of the bullet
+   Fragment(const Position & pt, const Velocity & v);
+   
+   // draw it
+   void render() const;
+   
+   // move it forward with regards to inertia. Let it age
+   void fly();
+   void setVelocity();
+   
+   Velocity getVelocity() const{ return v;};
+   void increaseSize(double n) { size *= n;};
 };
-
 /**********************
  * STREEK
  * Stuff that trails off the back of shrapnel

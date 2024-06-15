@@ -11,18 +11,20 @@
 
 class Flyer;
 class SkeetStorage;
+class Effect;
+class Points;
 
 class Mover
 {
 public:
    SkeetStorage* storage;
    
-   
-   virtual void move(Position & pt, double radius, Velocity &v, Position dimensions ) = 0;
-   virtual void moveFlyer(Flyer *flyer) = 0;
-   bool isOutOfBounds(Flyer *flyer)const;
-   double randomFloat(double min, double max);
-   int randomInt(int min, int max);
+   virtual void move    (Effect *effect          ) = 0;
+   virtual void move    (Points *points         ) = 0;
+   virtual void move    (Flyer *flyer           ) = 0;
+   bool isOutOfBounds   (Flyer *flyer           )const;
+   double randomFloat   (double min, double max );
+   int randomInt        (int min, int max       );
 };
 
 /*************************************
@@ -32,31 +34,31 @@ public:
 class BirdMover : public Mover
 {
 public:
-   virtual void moveFlyer(Flyer *flyer) = 0;
+   virtual void move(Flyer *flyer) = 0;
 };
 
 class MoveRegular : public BirdMover
 {
 public:
-   void moveFlyer(Flyer *flyer);
+   void move(Flyer *flyer);
 };
 
 class MoveFloater : public BirdMover
 {
 public:
-   void moveFlyer(Flyer *flyer);
+   void move(Flyer *flyer);
 };
 
 class MoveSinker : public BirdMover
 {
 public:
-   void moveFlyer(Flyer *flyer);
+   void move(Flyer *flyer);
 };
 
 class MoveCrazy : public BirdMover
 {
 public:
-   void moveFlyer(Flyer *flyer);
+   void move(Flyer *flyer);
 };
 
 
@@ -67,31 +69,31 @@ public:
 class BulletMover : public Mover
 {
 public:
-   virtual void moveFlyer(Flyer *flyer);
+   virtual void move(Flyer *flyer);
 };
 
 class MovePellet : public BulletMover
 {
 public:
-   void moveFlyer(Flyer *flyer);
+   void move(Flyer *flyer);
 };
 
 class MoveBomb : public BulletMover
 {
 public:
-   void moveFlyer(Flyer *flyer);
+   void move(Flyer *flyer);
 };
 
 class MoveShrapnel : public BulletMover
 {
 public:
-   void moveFlyer(Flyer *flyer);
+   void move(Flyer *flyer);
 };
 
 class MoveMissile : public BulletMover
 {
 public:
-   void moveFlyer(Flyer *flyer);
+   void move(Flyer *flyer);
 };
 
 
@@ -102,7 +104,7 @@ public:
 class PointMover : public Mover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void move(Points *points);
 };
 
 /*************************************
@@ -113,8 +115,25 @@ public:
 class EffectMover : public Mover
 {
 public:
-   void move(Position pt, double radius, Velocity v );
+   void move(Effect *effect) =0;
 };
 
+class MoveStreek : public EffectMover
+{
+public:
+   void move(Effect *effect);
+};
+
+class MoveFragment : public EffectMover
+{
+public:
+   void move(Effect *effect);
+};
+
+class MoveExhaust : public EffectMover
+{
+public:
+   void move(Effect *effect);
+};
 
 

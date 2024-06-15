@@ -51,7 +51,6 @@
 		C1841325273E9C4400143AB2 /* bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bullet.cpp; sourceTree = "<group>"; };
 		C1841326273E9C4500143AB2 /* gun.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gun.cpp; sourceTree = "<group>"; };
 		C1841327273E9C4700143AB2 /* bird.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bird.cpp; sourceTree = "<group>"; };
-		C1841328273E9C4900143AB2 /* skeet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = skeet.h; sourceTree = "<group>"; };
 		C1D4EAD32577F487002B56E3 /* Lab03 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab03; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D4EAE12577F574002B56E3 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
 		C1D4EAE42577F575002B56E3 /* position.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; tabWidth = 3; };
@@ -110,7 +109,6 @@
 				C1841325273E9C4400143AB2 /* bullet.cpp */,
 				C1841323273E9C4400143AB2 /* game.cpp */,
 				C1841326273E9C4500143AB2 /* gun.cpp */,
-				C1841328273E9C4900143AB2 /* skeet.h */,
 				C159391D271E278800A7F857 /* bullet.h */,
 				C16F25482716733A000FA407 /* time.cpp */,
 				C179F5FE2712254900BD3050 /* time.h */,
