@@ -31,13 +31,29 @@ private:
 	Mover* mover;
 public:
 public:
+	Flyer() : dead(false), points(0), radius(1.0), drawer(nullptr), mover(nullptr), type(BULLET) {}
 	Flyer(Type id) : dead(false), points(0), radius(1.0), drawer(nullptr), mover(nullptr) { type = id; }
+	void setInitial(double angle = 0.0, double speed = 30.0, double radius = 5.0, int value = 1)
+	{
+		// set the initial position
+		pt.setX(dimensions.getX() - 1.0);
+		pt.setY(1.0);
+		assert(pt.getX() > 100.0);
+
+		// set the initial velocity
+		v.setDx(-speed * cos(angle));
+		v.setDy(speed * sin(angle));
+		assert(v.getDx() <= 0.0);
+		assert(v.getDy() >= 0.0);
+	}
 
 	// setters
 	void operator=(const Position& rhs) { pt = rhs; }
 	void operator=(const Velocity& rhs) { v = rhs; }
 	void kill() { dead = true; }
 	void setPoints(int pts) { points = pts; }
+	void setDrawer(Drawer* d) { drawer = d; }
+	void setMover(Mover* m) { mover = m; }
 
 	// getters
 	bool isDead()           const { return dead; }
@@ -70,5 +86,5 @@ public:
 
 enum Type
 {
-	STANDARD, FLOATER, SINKER, CRAZY
+	STANDARD, FLOATER, SINKER, CRAZY, BULLET, MISSILE
 };

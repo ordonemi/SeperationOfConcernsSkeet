@@ -19,9 +19,9 @@ class Gun
 public:
    Gun(const Position & pt) : angle(0.78 /* 45 degrees */), pt(pt) {}  // 45 degrees initially
    void display() const;
-   void interact(int clockwise, int counterclockwise);
    double getAngle() const { return angle; }
    Position getPt() const { return pt; }
+   void setAngle(double angle) { this->angle = angle; }
    
 private:
    double angle;

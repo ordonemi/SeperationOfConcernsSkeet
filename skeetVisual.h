@@ -7,6 +7,8 @@
  *    The interface component of the game
  ************************************************************************/
 #include "skeetStorage.h"
+#include "flyer.h"
+#include "uiInteract.h"
 #pragma once
 
 /*************************************************************************
@@ -22,7 +24,7 @@ public:
         double redFore, double greenFore, double blueFore,
         double redBack, double greenBack, double blueBack) const;
     void drawBullseye(double angle) const;
-    void interact();
+    void interact(const UserInput& ui);
 
     bool isPlaying() { return storage.isPlaying(); }
     bool isGameOver() { return storage.isGameOver(); }
@@ -39,4 +41,9 @@ public:
 private:
     SkeetStorage storage;
     bool bullseye;
+    UserInput ui;
+
+    void gunInteract(int clockwise, int counterclockwise);
+    void reset() { storage.reset() };
+    void inputMissile(bool isUp, bool isDown, bool isB, Flyer* f);
 };

@@ -37,7 +37,7 @@ using namespace std;
  *********************************************/
 void SkeetVisual::display()
 {
-    drawRectangle(storage.getGunPt(), M_PI_2 - storage.getGunAngle(), 10.0, 100.0, 1.0, 1.0, 1.0);
+    drawRectangle(storage.getGun().getPt(), M_PI_2 - storage.getGun().getAngle(), 10.0, 100.0, 1.0, 1.0, 1.0);
 }
 
 /************************************************************************
@@ -228,7 +228,7 @@ void SkeetVisual::drawStatus() const
 
         // draw end of game status
         drawText(Position(storage.getDimension().getX() / 2 - 30, storage.getDimension().getY() / 2 - 10),
-            storage.getText());
+            storage.getTimeText());
     }
     else
     {
@@ -275,7 +275,7 @@ void SkeetVisual::drawLevel()
    
    // draw the bullseye
    if (bullseye)
-      drawBullseye(storage.getGunAngle());
+      drawBullseye(storage.getGun().getAngle());
 
    // output the gun
    display();
@@ -284,147 +284,118 @@ void SkeetVisual::drawLevel()
    for (auto it = storage.getPointIterator(); it != storage.getPointEnd(); ++it)
        (*it)->getDrawer()->drawPoints((*it)->getPosition(), (*it)->getValue(), (*it)->getAge());
    for (auto it = storage.getBulletIterator(); it != storage.getBulletEnd(); ++it)
-      effect->render();
-   for (auto bullet : bullets)
-      bullet->output();
-   for (auto element : birds)
-      element->draw();
+       (*it)->getDrawer()->draw((*it)->getPosition(), (*it)->getRadius(), (*it)->getVelocity());
+   for (auto it = storage.getEffectIterator(); it != storage.getEffectEnd(); ++it)
+       (*it)->getDrawer()->drawEffects();
+   for (auto it = storage.getBirdIterator(); it != storage.getBirdEnd(); ++it)
+       (*it)->getDrawer()->draw((*it)->getPosition(), (*it)->getRadius(), (*it)->getVelocity());
    
    // status
-   drawText(Position(10,                         dimensions.getY() - 30), storage.getScoreText());
-   drawText(Position(dimensions.getX() / 2 - 30, dimensions.getY() - 30), storage.getTimeText());
-   drawText(Position(dimensions.getX() - 110,    dimensions.getY() - 30), storage.getHitRatioText());
+   drawText(Position(10,                         storage.getDimension().getY() - 30), storage.getScoreText());
+   drawText(Position(storage.getDimension().getX() / 2 - 30, storage.getDimension().getY() - 30), storage.getTimeText());
+   drawText(Position(storage.getDimension().getX() - 110, storage.getDimension().getY() - 30), storage.getHitRatioText());
 }
 
+/*********************************************
+ * SKEET VISUAL : GUN INTERACT
+ * Move the gun
+ *********************************************/
+void SkeetVisual::gunInteract(int clockwise, int counterclockwise)
+{
+    // move it
+    if (clockwise > 0)
+    {
+        if (clockwise > 10)
+        {
+            storage.getGun().setAngle(storage.getGun().getAngle() + 0.06);
+        }
+        else
+        {
+            storage.getGun().setAngle(storage.getGun().getAngle() + 0.025);
+        }
+        if (storage.getGun().getAngle() > M_PI_2)
+            storage.getGun().setAngle(M_PI_2);
+    }
+    if (counterclockwise > 0)
+    {
+        if (clockwise > 10)
+        {
+            storage.getGun().setAngle(storage.getGun().getAngle() - 0.06);
+        }
+        else
+        {
+            storage.getGun().setAngle(storage.getGun().getAngle() - 0.025);
+        }
+        if (storage.getGun().getAngle() < 0.0)
+            storage.getGun().setAngle(0.0);
+    }
+}
 
-///************************
-// * SKEET ANIMATE
-// * move the gameplay by one unit of time
-// ************************/
-//void Skeet::animate()
-//{
-//   time++;
-//   
-//   // if status, then do not move the game
-//   if (time.isStatus())
-//   {
-//      // get rid of the bullets and the birds without changing the score
-//      birds.clear();
-//      bullets.clear();
-//      effects.clear();
-//      points.clear();
-//      return;
-//   }
-//   
-//   // spawn
-//   spawn();
-//   
-//   // move the birds and the bullets
-//   for (auto element : birds)
-//   {
-//      element->advance();
-//      hitRatio.adjust(element->isDead() ? -1 : 0);
-//   }
-//   for (auto bullet : bullets)
-//      bullet->move(effects);
-//   for (auto effect : effects)
-//      effect->fly();
-//   for (auto & pts : points)
-//      pts.update();
-//      
-//   // hit detection
-//   for (auto element : birds)
-//      for (auto bullet : bullets)
-//         if (!element->isDead() && !bullet->isDead() &&
-//             element->getRadius() + bullet->getRadius() >
-//             minimumDistance(element->getPosition(), element->getVelocity(),
-//                             bullet->getPosition(),  bullet->getVelocity()))
-//         {
-//            for (int i = 0; i < 25; i++)
-//               effects.push_back(new Fragment(bullet->getPosition(), bullet->getVelocity()));
-//            element->kill();
-//            bullet->kill();
-//            hitRatio.adjust(1);
-//            bullet->setValue(-(element->getPoints()));
-//            element->setPoints(0);
-//         }
-//   
-//   // remove the zombie birds
-//   for (auto it = birds.begin(); it != birds.end();)
-//      if ((*it)->isDead())
-//      {
-//         if ((*it)->getPoints())
-//            points.push_back(Points((*it)->getPosition(), (*it)->getPoints()));
-//         score.adjust((*it)->getPoints());
-//         it = birds.erase(it);
-//      }
-//      else
-//         ++it;
-//       
-//   // remove zombie bullets
-//   for (auto it = bullets.begin(); it != bullets.end(); )
-//      if ((*it)->isDead())
-//      {
-//         (*it)->death(bullets);
-//         int value = -(*it)->getValue();
-//         points.push_back(Points((*it)->getPosition(), value));
-//         score.adjust(value);
-//         it = bullets.erase(it);
-//      }
-//      else
-//         ++it;
-//   
-//   // remove zombie fragments
-//   for (auto it = effects.begin(); it != effects.end();)
-//      if ((*it)->isDead())
-//         it = effects.erase(it);
-//      else
-//         ++it;
-//
-//   // remove expired points
-//   for (auto it = points.begin(); it != points.end();)
-//      if ((*it).isDead())
-//         it = points.erase(it);
-//      else
-//         ++it;
-//}
+/*******************************
+ * SKEET VISUAL : MOVE MISSILE
+ ********************************/
+void SkeetVisual::inputMissile(bool isUp, bool isDown, bool isB, Flyer* f)
+{
+    if (isUp)
+        f->getVelocity().turn(0.04);
+    if (isDown)
+        f->getVelocity().turn(-0.04);
+}
 
-///************************
-// * SKEET INTERACT
-// * handle all user input
-// ************************/
-//void Skeet::interact(const UserInput & ui)
-//{
-//   // reset the game
-//   if (time.isGameOver() && ui.isSpace())
-//   { 
-//      time.reset();
-//      score.reset();
-//      hitRatio.reset();
-//      return;
-//   }
-//
-//   // gather input from the interface
-//   gun.interact(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft());
-//   Bullet *p = nullptr;
-//
-//   // a pellet can be shot at any time
-//   if (ui.isSpace())
-//      p = new Pellet(gun.getAngle());
-//   // missiles can be shot at level 2 and higher
-//   else if (ui.isM() && time.level() > 1)
-//      p = new Missile(gun.getAngle());
-//   // bombs can be shot at level 3 and higher
-//   else if (ui.isB() && time.level() > 2)
-//      p = new Bomb(gun.getAngle());
-//   
-//   bullseye = ui.isShift();
-//
-//   // add something if something has been added
-//   if (nullptr != p)
-//      bullets.push_back(p);
-//   
-//   // send movement information to all the bullets. Only the missile cares.
-//   for (auto bullet : bullets)
-//      bullet->input(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft(), ui.isB()); 
-//}
+/************************
+ * SKEET VISUAL INTERACT
+ * handle all user input
+ ************************/
+void SkeetVisual::interact(const UserInput & ui)
+{
+   // reset the game
+   if (storage.isGameOver() && ui.isSpace())
+   {
+       reset();
+       return;
+   }
+
+   // gather input from the interface
+   gunInteract(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft());
+   Flyer *p = nullptr;
+
+   // a pellet can be shot at any time
+   if (ui.isSpace())
+   {
+       p = new Flyer();
+       p->setMover(new MovePellet());
+       p->setDrawer(new DrawPellet());
+       p->setInitial(storage.getGun().getAngle());
+   }
+   // missiles can be shot at level 2 and higher
+   else if (ui.isM() && storage.getLevel() > 1)
+   {
+       p = new Flyer(MISSILE);
+       p->setMover(new MoveMissile());
+       p->setDrawer(new DrawMissile());
+       p->setInitial(storage.getGun().getAngle());
+   }
+   // bombs can be shot at level 3 and higher
+   else if (ui.isB() && storage.getLevel() > 2)
+   {
+       p = new Flyer();
+       p->setMover(new MoveBomb());
+       p->setDrawer(new DrawBomb());
+       p->setInitial(storage.getGun().getAngle());
+   }
+   
+   bullseye = ui.isShift();
+
+   // add something if something has been added
+   if (nullptr != p)
+       storage.enrollBullet(p);
+   
+   // send movement information to all the bullets. Only the missile cares.
+   for (auto it = storage.getBulletIterator(); it != storage.getBulletEnd(); ++it)
+   {
+       if ((*it)->getType() == MISSILE)
+       {
+           inputMissile(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft(), ui.isB(), (*it));
+       }
+   }
+}

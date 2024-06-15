@@ -18,6 +18,7 @@ class Effect
 protected:
     Position pt;      // location of the effect
     double age;    // 1.0 = new, 0.0 = dead
+    Drawer* drawer;
 public:
     // create a fragment based on the velocity and position of the bullet
     Effect(const Position & pt) : pt(pt), age(0.5) {}
@@ -30,6 +31,8 @@ public:
     
     // it is dead when age goes to 0.0
     bool isDead() const { return age <= 0.0; }
+
+    Drawer* getDrawer() { return drawer; }
 };
 
 /**********************

@@ -2,7 +2,7 @@
 
 BirdFactory SkeetStorage::getBirdFactory()
 {
-	switch (time->level())
+	switch (time.level())
 	{
 	case 1:
 		return birdFactoryL1;

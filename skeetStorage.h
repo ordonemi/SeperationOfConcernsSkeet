@@ -21,10 +21,11 @@ private:
 	std::vector<Effect*> effects;
 	std::vector<Points*> points;
 
-	Gun*      gun;
-	Time*     time;
-	Score*    score;
-	HitRatio* hitRatio;
+	Gun      gun;
+	Time     time;
+	Score    score;
+	HitRatio hitRatio;
+	Position dimensions;
 
 public:
 	void enrollBird  (Flyer* bird);
@@ -36,55 +37,33 @@ public:
 	void enrollEffects(Effect* effect);
 	void unenrollPoint(Score* score);
 
-	std::vector<Flyer*>::iterator getBirdIterator()
-	{
-		return birds.begin();
-	}
-
-	std::vector<Flyer*>::iterator getBirdEnd()
-	{
-		return birds.end();
-	}
-
-	std::vector<Flyer*>::iterator getBulletIterator()
-	{
-		return bullets.begin();
-	}
-
-	std::vector<Flyer*>::iterator getBulletEnd()
-	{
-		return bullets.end();
-	}
-
-	std::vector<Effect*>::iterator getEffectIterator()
-	{
-		return effects.begin();
-	}
-
-	std::vector<Effect*>::iterator getEffectEnd()
-	{
-		return effects.end();
-	}
-
-	std::vector<Points*>::iterator getPointIterator()
-	{
-		return points.begin();
-	}
-
-	std::vector<Points*>::iterator getPointEnd()
-	{
-		return points.end();
-	}
-
 	BirdFactory getBirdFactory();
-	int getLevel()
-	{
-		return time->level();
-	}
 
-	int getBirdsSize()
+	std::vector<Flyer*>::iterator getBirdIterator() { return birds.begin(); }
+	std::vector<Flyer*>::iterator getBirdEnd() { return birds.end(); }
+	std::vector<Flyer*>::iterator getBulletIterator() { return bullets.begin(); }
+	std::vector<Flyer*>::iterator getBulletEnd() { return bullets.end(); }
+	std::vector<Effect*>::iterator getEffectIterator() { return effects.begin(); }
+	std::vector<Effect*>::iterator getEffectEnd() { return effects.end(); }
+	std::vector<Points*>::iterator getPointIterator() { return points.begin(); }
+	std::vector<Points*>::iterator getPointEnd() { return points.end(); }
+
+	int getLevel() const { return time.level(); }
+	int getBirdsSize() { return birds.size(); }
+	Gun getGun() { return gun; }
+	Position getDimension() const { return dimensions; }
+	bool isGameOver() const { return time.isGameOver(); }
+	bool isPlaying() const { return time.isPlaying(); }
+	double getPercentLeft() const { return time.percentLeft(); }
+	double secondsLeft() const { return time.secondsLeft(); }
+	std::string getTimeText() const { return time.getText(); }
+	std::string getScoreText() const { return score.getText(); }
+	std::string getHitRatioText() const { return hitRatio.getText(); }
+	void reset()
 	{
-		return birds.size();
+		time.reset();
+		score.reset();
+		hitRatio.reset();
 	}
 };
 
