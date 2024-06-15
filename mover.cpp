@@ -8,6 +8,9 @@
 #include "mover.h"
 #include <cassert>
 #include "flyer.h"
+#include "skeetStorage.h"
+#include "effect.h"
+
 
 /******************************************************************
  * RANDOM
@@ -36,11 +39,11 @@ bool Mover::isOutOfBounds(Flyer *flyer)const
 
 /***************************************************************/
 /***************************************************************/
-/*            BULLET DRAWER              */
+/*            BULLET MOVER               */
 /***************************************************************/
 /***************************************************************/
 
-void MovePellet ::moveFlyer(Flyer *flyer)
+void BulletMover :: moveFlyer(Flyer *flyer)
 {
    // inertia
    flyer->getPosition().add(flyer->getVelocity());
@@ -48,6 +51,11 @@ void MovePellet ::moveFlyer(Flyer *flyer)
    // out of bounds checker
    if (isOutOfBounds(flyer))
       flyer->kill();
+}
+
+void MovePellet ::moveFlyer(Flyer *flyer)
+{
+   BulletMover :: moveFlyer(flyer);
 };
 
 void MoveBomb :: moveFlyer(Flyer *flyer)
@@ -57,14 +65,30 @@ void MoveBomb :: moveFlyer(Flyer *flyer)
    if (!flyer->getTimeToDie())
        flyer->kill();
    
+   BulletMover::moveFlyer(flyer);
+   
 };
 
 void MoveShrapnel :: moveFlyer(Flyer *flyer)
 {
+   // kill if it has been around too long
+   flyer->lowerTimeToDie();
+   if (!flyer->getTimeToDie())
+       flyer->kill();
+
+   // add a streek
+   storage->enrollEffects(new Streek (flyer->getPosition(), flyer->getVelocity()));
+   
+   // do the usual bullet stuff (like inertia)
+   BulletMover::moveFlyer(flyer);
 };
 
 void MoveMissile :: moveFlyer(Flyer *flyer)
 {
+   // add an exhoust
+   storage->enrollEffects(new Exhaust (flyer->getPosition(), flyer->getVelocity()));
+   // do the usual bullet stuff (like inertia)
+   BulletMover::moveFlyer(flyer);
 };
 
 
@@ -78,7 +102,7 @@ void EffectMover :: move(Position pt, double radius, Velocity v )
 
 /***************************************************************/
 /***************************************************************/
-/*            BIRD DRAWER              */
+/*            BIRD MOVER                 */
 /***************************************************************/
 /***************************************************************/
 
@@ -94,7 +118,7 @@ void MoveRegular :: moveFlyer(Flyer *flyer)
    if (isOutOfBounds(flyer))
    {
       flyer->kill();
-      flyer->getPoints() *= -1; // points go negative when it is missed!
+      flyer->updatePoints(-1); // points go negative when it is missed!
    }
 };
 
@@ -113,7 +137,7 @@ void MoveFloater :: moveFlyer(Flyer *flyer)
    if (isOutOfBounds(flyer))
    {
       flyer->kill();
-      flyer->getPoints() *= -1; // points go negative when it is missed!
+      flyer->updatePoints(-1); // points go negative when it is missed!
    }
 };
 
@@ -129,7 +153,7 @@ void MoveSinker :: moveFlyer(Flyer *flyer)
    if (isOutOfBounds(flyer))
    {
       flyer->kill();
-      flyer->getPoints() *= -1; // points go negative when it is missed!
+      flyer->updatePoints(-1); // points go negative when it is missed!
    }
 };
 
@@ -149,6 +173,6 @@ void MoveCrazy :: moveFlyer(Flyer *flyer)
    if (isOutOfBounds(flyer))
    {
       flyer->kill();
-      flyer->getPoints() *= -1; // points go negative when it is missed!
+      flyer->updatePoints(-1); // points go negative when it is missed!
    }
 };

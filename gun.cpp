@@ -66,34 +66,6 @@ inline void glVertexPoint(const Position& point)
    glVertex2f((GLfloat)point.getX(), (GLfloat)point.getY());
 }
 
-/************************************************************************
- * DRAW RECTANGLE
- * Draw a rectangle on the screen from the beginning to the end.
- *************************************************************************/
-void drawRectangle(const Position& pt,
-                   double angle = 0.0,
-                   double width = 10.0,
-                   double height = 100.0,
-                   double red = 1.0,
-                   double green = 1.0,
-                   double blue = 1.0)
-{
-   // Get ready...
-   glBegin(GL_QUADS);
-   glColor3f((GLfloat)red, (GLfloat)green, (GLfloat)blue);
-
-   // Draw the actual line
-   glVertexPoint(rotate(pt,  width / 2.0,  height / 2.0, angle));
-   glVertexPoint(rotate(pt,  width / 2.0, -height / 2.0, angle));
-   glVertexPoint(rotate(pt, -width / 2.0, -height / 2.0, angle));
-   glVertexPoint(rotate(pt, -width / 2.0,  height / 2.0, angle));
-   glVertexPoint(rotate(pt,  width / 2.0,  height / 2.0, angle));
-
-   // Complete drawing
-   glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
-   glEnd();
-}
-
  /*********************************************
   * GUN : DISPLAY
   * Display the gun on the screen
@@ -101,25 +73,4 @@ void drawRectangle(const Position& pt,
 void Gun::display() const
 {
    drawRectangle(pt, M_PI_2 - angle, 10.0, 100.0, 1.0, 1.0, 1.0);
-}
-
-/*********************************************
- * GUN : INTERACT
- * Move the gun
- *********************************************/
-void Gun::interact(int clockwise, int counterclockwise)
-{
-   // move it
-   if (clockwise > 0)
-   {
-      angle += (clockwise > 10) ? 0.06 : 0.025;
-      if (angle > M_PI_2)
-         angle = M_PI_2;
-   }
-   if (counterclockwise > 0)
-   {
-      angle -= (clockwise > 10) ? 0.06 : 0.025;
-      if (angle < 0.0)
-         angle = 0.0;
-   }
 }

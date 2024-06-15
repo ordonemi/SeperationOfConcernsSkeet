@@ -97,3 +97,36 @@ public:
     void draw();
     void advance();
 };
+
+
+enum BirdType { STANDARD, SINKER, FLOATER, CRAZY };
+
+class BirdFactory
+{
+public:
+    virtual Bird* factory(BirdType type);
+};
+
+class BirdFactoryLevel1 : public BirdFactory
+{
+public:
+    Bird* factory(BirdType type) override;
+};
+
+class BirdFactoryLevel2 : public BirdFactory
+{
+public:
+    Bird* factory(BirdType type) override;
+};
+
+class BirdFactoryLevel3 : public BirdFactory
+{
+public:
+    Bird* factory(BirdType type) override;
+};
+
+class BirdFactoryLevel4 : public BirdFactory
+{
+public:
+    Bird* factory(BirdType type) override;
+};

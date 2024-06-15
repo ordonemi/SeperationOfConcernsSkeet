@@ -11,6 +11,7 @@
 #pragma once
 
 #include "position.h"
+#include "drawer.h"
 
  /*********************************************
   * POINTS
@@ -20,9 +21,21 @@ class Points
 {
 public:
    Points(const Position& pt, int value);
-   void show() const;
+   PointDrawer* drawer;
+   PointMover* mover;
    void update();
    bool isDead() const {return age <= 0.0; }
+
+   PointDrawer* getDrawer()
+   {
+	   return drawer;
+   }
+
+   PointMover* getMover() { return mover; }
+
+   Position getPosition() { return pt; }
+   int getValue() { return value; }
+   float getAge() { return age; }
 private:
    Position pt;
    Velocity v;
