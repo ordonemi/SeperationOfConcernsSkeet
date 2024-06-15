@@ -47,6 +47,6 @@ private:
     UserInput ui;
 
     void gunInteract(int clockwise, int counterclockwise);
-    void reset() { storage.reset() };
+   void reset() { storage.reset(); };
     void inputMissile(bool isUp, bool isDown, bool isB, Flyer* f);
 };

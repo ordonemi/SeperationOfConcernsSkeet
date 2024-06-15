@@ -9,7 +9,9 @@
 
 #pragma once
 #include "position.h"
-#include "mover.h"
+
+class Drawer;
+class Mover;
 
 /**********************
  * Effect: stuff that is not interactive
@@ -59,8 +61,7 @@ public:
     
     // move it forward with regards to inertia. Let it age
     void fly();
-
-    void setVelocity()
+    void setVelocity();
 };
 
 /**********************

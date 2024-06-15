@@ -26,5 +26,5 @@ private:
 	void clearBullets() { storage.clearBullets(); }
 	void clearEffects() { storage.clearEffects(); }
 	void clearPoints() { storage.clearPoints(); }
-	void death() { storage.death() }
+   void death() { storage.death(); }
 };

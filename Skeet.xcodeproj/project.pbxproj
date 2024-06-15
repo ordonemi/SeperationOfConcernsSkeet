@@ -16,7 +16,6 @@
 		C184132B273E9C4900143AB2 /* gun.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1841326273E9C4500143AB2 /* gun.cpp */; };
 		C184132C273E9C4900143AB2 /* bird.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1841327273E9C4700143AB2 /* bird.cpp */; };
 		C1D4EAEA2577F57B002B56E3 /* position.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE12577F574002B56E3 /* position.cpp */; };
-		C1D4EAEB2577F57B002B56E3 /* skeet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE22577F575002B56E3 /* skeet.cpp */; };
 		C1D4EAED2577F57B002B56E3 /* uiInteract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1D4EAE52577F576002B56E3 /* uiInteract.cpp */; };
 		C1D4EAF22577F58C002B56E3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EAF02577F58C002B56E3 /* GLUT.framework */; };
 		C1D4EAF32577F58C002B56E3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D4EAF12577F58C002B56E3 /* OpenGL.framework */; };
@@ -55,7 +54,6 @@
 		C1841328273E9C4900143AB2 /* skeet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = skeet.h; sourceTree = "<group>"; };
 		C1D4EAD32577F487002B56E3 /* Lab03 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab03; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D4EAE12577F574002B56E3 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
-		C1D4EAE22577F575002B56E3 /* skeet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = skeet.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		C1D4EAE42577F575002B56E3 /* position.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; tabWidth = 3; };
 		C1D4EAE52577F576002B56E3 /* uiInteract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = uiInteract.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		C1D4EAE62577F578002B56E3 /* uiInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiInteract.h; sourceTree = "<group>"; };
@@ -65,6 +63,13 @@
 		E728ACE22C18B92500E01E0D /* drawer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drawer.h; sourceTree = "<group>"; };
 		E74885462C1B559600B31C4E /* mover.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mover.cpp; sourceTree = "<group>"; };
 		E74885472C1B559600B31C4E /* mover.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mover.h; sourceTree = "<group>"; };
+		E7B566862C1DF91F008FE90B /* skeetVisual.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = skeetVisual.cpp; sourceTree = "<group>"; };
+		E7B566872C1DF929008FE90B /* skeetVisual.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skeetVisual.h; sourceTree = "<group>"; };
+		E7B566882C1DF930008FE90B /* skeetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skeetStorage.h; sourceTree = "<group>"; };
+		E7B566892C1DF933008FE90B /* skeetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = skeetStorage.cpp; sourceTree = "<group>"; };
+		E7B5668A2C1DF93B008FE90B /* skeetLogic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skeetLogic.h; sourceTree = "<group>"; };
+		E7B5668B2C1DF93E008FE90B /* skeetLogic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = skeetLogic.cpp; sourceTree = "<group>"; };
+		E7B5668C2C1DF983008FE90B /* flyer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = flyer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +88,13 @@
 		C1D4EACA2577F487002B56E3 = {
 			isa = PBXGroup;
 			children = (
+				E7B5668C2C1DF983008FE90B /* flyer.h */,
+				E7B5668B2C1DF93E008FE90B /* skeetLogic.cpp */,
+				E7B5668A2C1DF93B008FE90B /* skeetLogic.h */,
+				E7B566892C1DF933008FE90B /* skeetStorage.cpp */,
+				E7B566882C1DF930008FE90B /* skeetStorage.h */,
+				E7B566872C1DF929008FE90B /* skeetVisual.h */,
+				E7B566862C1DF91F008FE90B /* skeetVisual.cpp */,
 				E74885462C1B559600B31C4E /* mover.cpp */,
 				E74885472C1B559600B31C4E /* mover.h */,
 				E728ACE12C18B92500E01E0D /* drawer.cpp */,
@@ -103,7 +115,6 @@
 				C16F25482716733A000FA407 /* time.cpp */,
 				C179F5FE2712254900BD3050 /* time.h */,
 				C179F5FD2710DE0E00BD3050 /* gun.h */,
-				C1D4EAE22577F575002B56E3 /* skeet.cpp */,
 				C1D4EAE12577F574002B56E3 /* position.cpp */,
 				C1D4EAE42577F575002B56E3 /* position.h */,
 				C1D4EAE52577F576002B56E3 /* uiInteract.cpp */,
@@ -197,7 +208,6 @@
 				C1D4EAEA2577F57B002B56E3 /* position.cpp in Sources */,
 				C16F25492716733A000FA407 /* time.cpp in Sources */,
 				C1841329273E9C4900143AB2 /* game.cpp in Sources */,
-				C1D4EAEB2577F57B002B56E3 /* skeet.cpp in Sources */,
 				C184132B273E9C4900143AB2 /* gun.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,8 +5,40 @@
 #include "score.h"
 #include "points.h"
 #include "vector"
+#include "flyer.h"
 
-class Flyer;
+class BirdFactory
+{
+public:
+   virtual Flyer* factory(Type type);
+};
+
+class BirdFactoryLevel1 : public BirdFactory
+{
+public:
+   Flyer* factory(Type type) override;
+};
+
+class BirdFactoryLevel2 : public BirdFactory
+{
+public:
+   Flyer* factory(Type type) override;
+};
+
+class BirdFactoryLevel3 : public BirdFactory
+{
+public:
+   Flyer* factory(Type type) override;
+};
+
+class BirdFactoryLevel4 : public BirdFactory
+{
+public:
+   Flyer* factory(Type type) override;
+};
+
+
+
 class SkeetStorage
 {
 private:
@@ -27,7 +59,7 @@ private:
 	Position dimensions;
 
 public:
-	SkeetStorage(Position d) { dimensions = d; }
+//	SkeetStorage(Position d) { dimensions = d; }
 	void enrollBird  (Flyer* bird);
 	void unenrollBird(Flyer*  bird);
 	void clearBirds() { birds.clear(); }
@@ -55,8 +87,18 @@ public:
 	std::vector<Points*>::iterator getPointIterator() { return points.begin(); }
 	std::vector<Points*>::iterator getPointEnd() { return points.end(); }
 
+   // Const iterators for read-only access
+   std::vector<Flyer*>::const_iterator getBirdIterator() const { return birds.cbegin(); }
+   std::vector<Flyer*>::const_iterator getBirdEnd() const { return birds.cend(); }
+   std::vector<Flyer*>::const_iterator getBulletIterator() const { return bullets.cbegin(); }
+   std::vector<Flyer*>::const_iterator getBulletEnd() const { return bullets.cend(); }
+   std::vector<Effect*>::const_iterator getEffectIterator() const { return effects.cbegin(); }
+   std::vector<Effect*>::const_iterator getEffectEnd() const { return effects.cend(); }
+   std::vector<Points*>::const_iterator getPointIterator() const { return points.cbegin(); }
+   std::vector<Points*>::const_iterator getPointEnd() const { return points.cend(); }
+   
 	int getLevel() const { return time.level(); }
-	int getBirdsSize() { return birds.size(); }
+	double getBirdsSize() { return birds.size(); }
 	Gun getGun() { return gun; }
 	Position getDimension() const { return dimensions; }
 	HitRatio getHitRatio() { return hitRatio; }
@@ -77,34 +119,3 @@ public:
 		hitRatio.reset();
 	}
 };
-
-class BirdFactory
-{
-public:
-	virtual Flyer* factory(Type type)
-};
-
-class BirdFactoryLevel1 : public BirdFactory
-{
-public:
-	Flyer* factory(Type type) override;
-};
-
-class BirdFactoryLevel2 : public BirdFactory
-{
-public:
-	Flyer* factory(Type type) override;
-};
-
-class BirdFactoryLevel3 : public BirdFactory
-{
-public:
-	Flyer* factory(Type type) override;
-};
-
-class BirdFactoryLevel4 : public BirdFactory
-{
-public:
-	Flyer* factory(Type type) override;
-};
-

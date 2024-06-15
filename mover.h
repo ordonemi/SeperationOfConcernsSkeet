@@ -7,8 +7,6 @@
 #pragma once
 
 #include "position.h"
-
-
 #include <stdio.h>
 
 class Flyer;
@@ -16,9 +14,10 @@ class SkeetStorage;
 
 class Mover
 {
-private:
-
 public:
+   SkeetStorage* storage;
+   
+   
    virtual void move(Position & pt, double radius, Velocity &v, Position dimensions ) = 0;
    virtual void moveFlyer(Flyer *flyer) = 0;
    bool isOutOfBounds(Flyer *flyer)const;
@@ -68,7 +67,7 @@ public:
 class BulletMover : public Mover
 {
 public:
-   virtual void moveFlyer(Flyer *flyer) = 0;
+   virtual void moveFlyer(Flyer *flyer);
 };
 
 class MovePellet : public BulletMover
