@@ -21,6 +21,7 @@ public:
    void display() const;
    void interact(int clockwise, int counterclockwise);
    double getAngle() const { return angle; }
+   Position getPt() const { return pt; }
    
 private:
    double angle;
