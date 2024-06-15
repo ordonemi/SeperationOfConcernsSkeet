@@ -34,6 +34,11 @@ void SkeetStorage::enrollEffects(Effect* effect)
 	effects.push_back(effect);
 }
 
+void SkeetStorage::enrollPoints(Points* point)
+{
+    points.push_back(point);
+}
+
 void SkeetStorage::unenrollBird(Flyer* bird)
 {
 	auto it = std::find(birds.begin(), birds.end(), bird);
@@ -59,6 +64,15 @@ void SkeetStorage::unenrollPoint(Score* score)
 	{
 		points.erase(it);
 	}
+}
+
+void SkeetStorage::unenrollEffect(Effect* effect)
+{
+    auto it = std::find(effects.begin(), effects.end(), effect);
+    if (it != effects.end())
+    {
+        effects.erase(it);
+    }
 }
 
 Flyer* BirdFactory::factory(Type type)

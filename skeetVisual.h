@@ -38,6 +38,7 @@ public:
         double blue = 1.0);
     void drawText(const Position& topLeft, const char* text);
     void display();
+    void startLogic() { logic.animate(); }
 
 private:
     SkeetStorage storage;

@@ -27,14 +27,22 @@ private:
 	Position dimensions;
 
 public:
+	SkeetStorage(Position d) { dimensions = d; }
 	void enrollBird  (Flyer* bird);
 	void unenrollBird(Flyer*  bird);
+	void clearBirds() { birds.clear(); }
 
 	void enrollBullet  (Flyer* bullet);
 	void unenrollBullet(Flyer* bullet);
+	void clearBullets() { bullets.clear(); }
 
 	void enrollEffects(Effect* effect);
+	void unenrollEffect(Effect* effect);
+	void clearEffects() { effects.clear(); }
+
+	void enrollPoints(Points* point);
 	void unenrollPoint(Score* score);
+	void clearPoints() { points.clear(); }
 
 	BirdFactory getBirdFactory();
 
@@ -51,6 +59,8 @@ public:
 	int getBirdsSize() { return birds.size(); }
 	Gun getGun() { return gun; }
 	Position getDimension() const { return dimensions; }
+	HitRatio getHitRatio() { return hitRatio; }
+	Score getScore() { return score; }
 	bool isGameOver() const { return time.isGameOver(); }
 	bool isPlaying() const { return time.isPlaying(); }
 	double getPercentLeft() const { return time.percentLeft(); }
@@ -58,17 +68,14 @@ public:
 	std::string getTimeText() const { return time.getText(); }
 	std::string getScoreText() const { return score.getText(); }
 	std::string getHitRatioText() const { return hitRatio.getText(); }
+	void advanceTime() { time++; };
+	bool isStatus() { return time.isStatus(); }
 	void reset()
 	{
 		time.reset();
 		score.reset();
 		hitRatio.reset();
 	}
-};
-
-enum Type
-{
-	STANDARD, FLOATER, SINKER, CRAZY, BULLET, MISSILE
 };
 
 class BirdFactory

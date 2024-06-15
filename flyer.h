@@ -30,8 +30,7 @@ private:
 	Drawer* drawer;
 	Mover* mover;
 public:
-public:
-	Flyer() : dead(false), points(0), radius(1.0), drawer(nullptr), mover(nullptr), type(BULLET) {}
+	Flyer() : dead(false), points(0), radius(1.0), drawer(nullptr), mover(nullptr) {}
 	Flyer(Type id) : dead(false), points(0), radius(1.0), drawer(nullptr), mover(nullptr) { type = id; }
 	void setInitial(double angle = 0.0, double speed = 30.0, double radius = 5.0, int value = 1)
 	{
@@ -54,6 +53,7 @@ public:
 	void setPoints(int pts) { points = pts; }
 	void setDrawer(Drawer* d) { drawer = d; }
 	void setMover(Mover* m) { mover = m; }
+	void setType(Type t) { type = t; }
 
 	// getters
 	bool isDead()           const { return dead; }
@@ -76,15 +76,14 @@ public:
 	Mover* getMover()        { return mover;      }
 	Position getDimension()  { return dimensions; }
 
-
 	bool isOutOfBounds() const
 	{
 		return (pt.getX() < -radius || pt.getX() >= dimensions.getX() + radius ||
 			pt.getY() < -radius || pt.getY() >= dimensions.getY() + radius);
 	}
-};
 
+};
 enum Type
 {
-	STANDARD, FLOATER, SINKER, CRAZY, BULLET, MISSILE
+	STANDARD, FLOATER, SINKER, CRAZY, PELLET, MISSILE, BOMB
 };

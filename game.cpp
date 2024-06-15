@@ -14,8 +14,8 @@
 #define WIDTH  800.0
 #define HEIGHT 800.0
 
-Position Bullet::dimensions(WIDTH, HEIGHT);
-Position Bird::dimensions(WIDTH, HEIGHT);
+//Position Bullet::dimensions(WIDTH, HEIGHT);
+//Position Bird::dimensions(WIDTH, HEIGHT);
 
  /*************************************
   * All the interesting work happens here, when
@@ -31,10 +31,10 @@ void callBack(const UserInput* pUI, void* p)
    SkeetVisual * pSkeet = (SkeetVisual*)p;
 
    // handle user input
-   //pSkeet->interact(*pUI);
+   pSkeet->interact(*pUI);
 
    // move the stuff
-   //pSkeet->animate();
+   pSkeet->startLogic();
 
    // output the stuff
    if (pSkeet->isPlaying())
@@ -66,7 +66,7 @@ int main(int argc, char** argv)
       dimensions);
 
    // initialize the game class
-   Skeet skeet(dimensions);
+   SkeetStorage skeet(dimensions);
 
    // set everything into action
    ui.run(callBack, &skeet);

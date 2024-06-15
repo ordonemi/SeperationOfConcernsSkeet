@@ -365,6 +365,7 @@ void SkeetVisual::interact(const UserInput & ui)
        p = new Flyer();
        p->setMover(new MovePellet());
        p->setDrawer(new DrawPellet());
+       p->setType(PELLET);
        p->setInitial(storage.getGun().getAngle());
    }
    // missiles can be shot at level 2 and higher
@@ -373,6 +374,7 @@ void SkeetVisual::interact(const UserInput & ui)
        p = new Flyer(MISSILE);
        p->setMover(new MoveMissile());
        p->setDrawer(new DrawMissile());
+       P->setType(MISSILE);
        p->setInitial(storage.getGun().getAngle());
    }
    // bombs can be shot at level 3 and higher
@@ -381,6 +383,7 @@ void SkeetVisual::interact(const UserInput & ui)
        p = new Flyer();
        p->setMover(new MoveBomb());
        p->setDrawer(new DrawBomb());
+       P->setType(BOMB);
        p->setInitial(storage.getGun().getAngle());
    }
    

@@ -36,6 +36,8 @@ public:
 
     Drawer* getDrawer() { return drawer; }
     Mover* getMover() { return mover; }
+    void setPosition(Position pos) { pt = pos; }
+
 
 };
 
@@ -57,6 +59,8 @@ public:
     
     // move it forward with regards to inertia. Let it age
     void fly();
+
+    void setVelocity()
 };
 
 /**********************

@@ -19,4 +19,12 @@ public:
 	void fire(Flyer* p);
 private:
 	SkeetStorage storage;
+
+	void advanceTime() { storage.advanceTime(); }
+	bool isStatus() { storage.isStatus(); }
+	void clearBirds() { storage.clearBirds(); }
+	void clearBullets() { storage.clearBullets(); }
+	void clearEffects() { storage.clearEffects(); }
+	void clearPoints() { storage.clearPoints(); }
+	void death() { storage.death() }
 };
