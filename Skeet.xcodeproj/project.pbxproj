@@ -61,7 +61,6 @@
 		C1D4EAE62577F578002B56E3 /* uiInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiInteract.h; sourceTree = "<group>"; };
 		C1D4EAF02577F58C002B56E3 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C1D4EAF12577F58C002B56E3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		E71A0CCF2C1CC61A00ACA1C4 /* flyer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = flyer.h; sourceTree = "<group>"; };
 		E728ACE12C18B92500E01E0D /* drawer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawer.cpp; sourceTree = "<group>"; };
 		E728ACE22C18B92500E01E0D /* drawer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drawer.h; sourceTree = "<group>"; };
 		E74885462C1B559600B31C4E /* mover.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mover.cpp; sourceTree = "<group>"; };
@@ -84,7 +83,6 @@
 		C1D4EACA2577F487002B56E3 = {
 			isa = PBXGroup;
 			children = (
-				E71A0CCF2C1CC61A00ACA1C4 /* flyer.h */,
 				E74885462C1B559600B31C4E /* mover.cpp */,
 				E74885472C1B559600B31C4E /* mover.h */,
 				E728ACE12C18B92500E01E0D /* drawer.cpp */,
