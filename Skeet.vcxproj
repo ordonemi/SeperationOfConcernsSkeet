@@ -25,6 +25,7 @@
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gun.cpp" />
+    <ClCompile Include="mover.cpp" />
     <ClCompile Include="points.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="score.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="effect.h" />
     <ClInclude Include="flyer.h" />
     <ClInclude Include="gun.h" />
+    <ClInclude Include="mover.h" />
     <ClInclude Include="skeetLogic.h" />
     <ClInclude Include="points.h" />
     <ClInclude Include="position.h" />
